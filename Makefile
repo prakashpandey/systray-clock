@@ -1,7 +1,5 @@
-GOOS=$(shell go env GOOS)
-GOARCH=$(shell go env GOARCH)
-BINARY_BASE_NAME=systray-clock
-BINARY_NAME=$(BINARY_BASE_NAME)-$(GOOS)-$(GOARCH)
+GOPATH=$(shell go env GOPATH)
+BINARY_NAME=x-clock
 
 .ONESHELL:
 export SHELL:=/bin/bash
@@ -26,6 +24,10 @@ build:
 .PHONY: run 
 run: build
 	./$(BINARY_NAME)
+
+.PHONY: install 
+install:
+	go build -o $(GOPATH)/$(BINARY_NAME)
 
 .PHONY: all 
 all: clean fmt test run
