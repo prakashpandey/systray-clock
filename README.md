@@ -1,6 +1,6 @@
-# Systray-clock
+# X-Clock
 
-A tiny executable used to display information such as time in system tray.
+A tiny executable binary used to display time information in system-tray.
 
 ## Build
 
@@ -9,9 +9,16 @@ A tiny executable used to display information such as time in system tray.
 - `make build`
 - `make run`
 
-## install binary to your class path
+## Install
+
+Install binary to your class path
 
 - `make install`
+- Now you can start the application by typing `x-clock` in your command line.
+
+## Screenshot
+
+![X-Clock](assets/clock-screenshot.png)
 
 ## Based on
 
