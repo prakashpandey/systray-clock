@@ -11,10 +11,20 @@ A tiny executable binary used to display time information in system-tray.
 
 ## Install
 
-Install binary to your class path
+### Install for the current user
+
+This will install binary to your `$GOPATH/bin`
 
 - `make install`
 - Now you can start the application by typing `x-clock` in your command line.
+
+### Install application system wide
+
+This will install application in `/usr/bin` and also make desktop entry.
+
+- `cd bin`
+- `chmod +x install.sh`
+- `./install.sh`
 
 ## Screenshot
 
@@ -26,5 +36,5 @@ Install binary to your class path
 
 ## License
 
-Entire application is released with [MIT License ](LICENSE) other than the third party icon image `assets/clock.png` which is
+Entire application is released with [MIT License](LICENSE) other than the third party icon image `assets/clock.png` which is
 taken from [icons8.com](https://icons8.com/icon/63250/watch). If you want to use the same clock icon `assets/clock.png` for your use case, please check its license by visiting [icons8.com](https://icons8.com/icon/63250/watch)

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=x-clock
+Comment=Application for displaying time in system tray
+Exec=/usr/bin/x-clock %U
+Terminal=false
+Type=Application
+Categories=Clock;
+MimeType=plain-text;
