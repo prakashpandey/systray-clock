@@ -45,7 +45,7 @@ func appendZeroIfSingleDigitInteger(i int) string {
 }
 
 func setIcon() {
-	file := "assets/clock.ico"
+	file := "assets/clock.png"
 	icon, err := ioutil.ReadFile(file)
 	if err != nil {
 		fmt.Printf("error reading app icon file: %s : %s", file, err)

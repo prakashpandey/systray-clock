@@ -26,4 +26,5 @@ Install binary to your class path
 
 ## License
 
-[MIT License ](LICENSE)
+Entire application is released with [MIT License ](LICENSE) other than the third party icon image `assets/clock.png` which is
+taken from [icons8.com](https://icons8.com/icon/63250/watch). If you want to use the same clock icon `assets/clock.png` for your use case, please check its license by visiting [icons8.com](https://icons8.com/icon/63250/watch)
