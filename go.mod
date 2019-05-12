@@ -1,4 +1,4 @@
-module github.com/prakashpandey/systray-clock
+module github.com/prakashpandey/x-clock
 
 go 1.12
 

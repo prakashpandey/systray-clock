@@ -22,9 +22,8 @@ This will install binary to your `$GOPATH/bin`
 
 This will install application in `/usr/bin` and also make desktop entry.
 
-- `cd bin`
-- `chmod +x install.sh`
-- `./install.sh`
+- `chmod +x ./bin/install.sh`
+- `./bin/install.sh`
 
 ## Screenshot
 

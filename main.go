@@ -13,12 +13,12 @@ import (
 )
 
 const (
-	appName              = "x-clock"
-	tzIndia              = "Asia/Kolkata"
-	tzAusSyd             = "Australia/Sydney"
-	defaultAppDirName    = ".x-clock"
-	defaultIconFileName  = "clock.png"
-	defaultRemoteFileURL = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
+	appName        = "x-clock"
+	tzIndia        = "Asia/Kolkata"
+	tzAusSyd       = "Australia/Sydney"
+	appHomeDirName = ".x-clock"
+	iconFileName   = "clock.png"
+	remoteIconURL  = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
 )
 
 func main() {
@@ -56,9 +56,9 @@ func setIcon() error {
 	if err != nil {
 		return err
 	}
-	filePath := fmt.Sprintf("%s/%s", appHome, defaultIconFileName)
+	filePath := fmt.Sprintf("%s/%s", appHome, iconFileName)
 	if !fileExist(filePath) {
-		if _, err := downloadFile(defaultRemoteFileURL, appHome, defaultIconFileName); err != nil {
+		if _, err := downloadFile(remoteIconURL, appHome, iconFileName); err != nil {
 			return err
 		}
 	}
@@ -139,7 +139,7 @@ func getAppHome() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("%s/%s", userHome, defaultAppDirName), nil
+	return fmt.Sprintf("%s/%s", userHome, appHomeDirName), nil
 }
 
 func getUserHomeDir() (string, error) {
