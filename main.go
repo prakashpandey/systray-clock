@@ -2,16 +2,23 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
+	"net/http"
+	"os"
+	"os/user"
 	"time"
 
 	"github.com/getlantern/systray"
 )
 
 const (
-	appName  = "x-clock"
-	tzIndia  = "Asia/Kolkata"
-	tzAusSyd = "Australia/Sydney"
+	appName              = "x-clock"
+	tzIndia              = "Asia/Kolkata"
+	tzAusSyd             = "Australia/Sydney"
+	defaultAppDirName    = ".x-clock"
+	defaultIconFileName  = "clock.png"
+	defaultRemoteFileURL = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
 )
 
 func main() {
@@ -44,13 +51,30 @@ func appendZeroIfSingleDigitInteger(i int) string {
 	return fmt.Sprintf("%d", i)
 }
 
-func setIcon() {
-	file := "assets/clock.png"
-	icon, err := ioutil.ReadFile(file)
+func setIcon() error {
+	appHome, err := getAppHome()
 	if err != nil {
-		fmt.Printf("error reading app icon file: %s : %s", file, err)
+		return err
+	}
+	filePath := fmt.Sprintf("%s/%s", appHome, defaultIconFileName)
+	if !fileExist(filePath) {
+		if _, err := downloadFile(defaultRemoteFileURL, appHome, defaultIconFileName); err != nil {
+			return err
+		}
+	}
+	icon, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("error reading app icon file: %s : %s", filePath, err)
 	}
 	systray.SetIcon(icon)
+	return nil
+}
+
+func fileExist(path string) bool {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
 
 type cycle string
@@ -81,4 +105,47 @@ func normalizeTo12Hour(h int) (int, cycle, error) {
 
 func exit() {
 	fmt.Println("x-clock exiting ...")
+}
+
+func downloadFile(url, targetDirectory, targetFileName string) (*os.File, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	} else if !statusOk(resp.StatusCode) {
+		return nil, fmt.Errorf("failed to download file from url: %s, status code: %d", url, resp.StatusCode)
+	}
+	defer resp.Body.Close()
+	// create dir
+	if err := os.MkdirAll(targetDirectory, 0755); err != nil {
+		return nil, err
+	}
+	targetPath := fmt.Sprintf("%s/%s", targetDirectory, targetFileName)
+	file, err := os.OpenFile(targetPath, os.O_RDWR|os.O_CREATE, 0755)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := io.Copy(file, resp.Body); err != nil {
+		return nil, err
+	}
+	return file, nil
+}
+
+func statusOk(code int) bool {
+	return 200 <= code && code < 400
+}
+
+func getAppHome() (string, error) {
+	userHome, err := getUserHomeDir()
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s/%s", userHome, defaultAppDirName), nil
+}
+
+func getUserHomeDir() (string, error) {
+	usr, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+	return usr.HomeDir, nil
 }
