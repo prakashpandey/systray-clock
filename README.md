@@ -2,26 +2,12 @@
 
 A tiny executable binary used to display time information in system-tray.
 
-## Build
+## Build and Install
 
-- `go get github.com/prakashpandey/x-clock`
-- `cd $GOPATH/src/github.com/prakashpandey/x-clock`
-- `make build`
-- `make run`
+This will install application in `/usr/bin` and also it make desktop entry.
 
-## Install
-
-### Install for the current user
-
-This will install binary to your `$GOPATH/bin`
-
-- `make install`
-- Now you can start the application by typing `x-clock` in your command line.
-
-### Install application system wide
-
-This will install application in `/usr/bin` and also make desktop entry.
-
+- Clone or download the project `git clone github.com/prakashpandey/x-clock`
+- `cd x-clock`
 - `chmod +x ./bin/install.sh`
 - `./bin/install.sh`
 
