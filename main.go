@@ -35,6 +35,11 @@ func run() {
 		}
 	}()
 	systray.SetTooltip(appName)
+	quit := systray.AddMenuItem("Quit", "Quit x-clock")
+	go func() {
+		<-quit.ClickedCh
+		systray.Quit()
+	}()
 }
 
 func getTime(timezone string) string {
