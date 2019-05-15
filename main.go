@@ -13,16 +13,38 @@ import (
 )
 
 const (
-	appName        = "x-clock"
-	tzIndia        = "Asia/Kolkata"
-	tzAusSyd       = "Australia/Sydney"
-	appHomeDirName = ".x-clock"
-	iconFileName   = "clock.png"
-	remoteIconURL  = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
+	appName             = "x-clock"
+	tzIndia             = "Asia/Kolkata"
+	tzAusSyd            = "Australia/Sydney"
+	appHomeDirName      = ".x-clock"
+	sysTrayIconFileName = "clock.png"
+	desktopIconFileName = "clock-desktop.png"
+	remoteIconURL       = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
 )
 
 func main() {
+	downloadIconsIfNotExist()
 	systray.Run(run, exit)
+}
+
+func downloadIconsIfNotExist() error {
+	appHome, err := getAppHome()
+	if err != nil {
+		return err
+	}
+	iconTray := fmt.Sprintf("%s/%s", appHome, sysTrayIconFileName)
+	if !fileExist(iconTray) {
+		if _, err := downloadFile(remoteIconURL, appHome, sysTrayIconFileName); err != nil {
+			return err
+		}
+	}
+	desktopIcon := fmt.Sprintf("%s/%s", appHome, desktopIconFileName)
+	if !fileExist(iconTray) {
+		if _, err := downloadFile(remoteIconURL, appHome, desktopIcon); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func run() {
@@ -61,12 +83,7 @@ func setIcon() error {
 	if err != nil {
 		return err
 	}
-	filePath := fmt.Sprintf("%s/%s", appHome, iconFileName)
-	if !fileExist(filePath) {
-		if _, err := downloadFile(remoteIconURL, appHome, iconFileName); err != nil {
-			return err
-		}
-	}
+	filePath := fmt.Sprintf("%s/%s", appHome, sysTrayIconFileName)
 	icon, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		fmt.Printf("error reading app icon file: %s : %s", filePath, err)

@@ -21,5 +21,10 @@ This will install application in `/usr/bin` and also it make desktop entry.
 
 ## License
 
-Entire application is released with [MIT License](LICENSE) other than the third party icon image `assets/clock.png` which is
-taken from [icons8.com](https://icons8.com/icon/63250/watch). If you want to use the same clock icon `assets/clock.png` for your use case, please check its license by visiting [icons8.com](https://icons8.com/icon/63250/watch)
+Entire application is released with [MIT License](LICENSE) other than the third party icon images in `assets` folder.
+
+## Icon credits
+
+<div>
+      Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+</div>
