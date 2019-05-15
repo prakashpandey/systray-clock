@@ -19,7 +19,8 @@ const (
 	appHomeDirName      = ".x-clock"
 	sysTrayIconFileName = "clock.png"
 	desktopIconFileName = "clock-desktop.png"
-	remoteIconURL       = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
+	systrayIconURL      = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock.png"
+	desktopIconURL      = "https://raw.githubusercontent.com/prakashpandey/x-clock/master/assets/clock-desktop.png"
 )
 
 func main() {
@@ -34,13 +35,13 @@ func downloadIconsIfNotExist() error {
 	}
 	iconTray := fmt.Sprintf("%s/%s", appHome, sysTrayIconFileName)
 	if !fileExist(iconTray) {
-		if _, err := downloadFile(remoteIconURL, appHome, sysTrayIconFileName); err != nil {
+		if _, err := downloadFile(systrayIconURL, appHome, sysTrayIconFileName); err != nil {
 			return err
 		}
 	}
 	desktopIcon := fmt.Sprintf("%s/%s", appHome, desktopIconFileName)
 	if !fileExist(iconTray) {
-		if _, err := downloadFile(remoteIconURL, appHome, desktopIcon); err != nil {
+		if _, err := downloadFile(desktopIconURL, appHome, desktopIcon); err != nil {
 			return err
 		}
 	}
