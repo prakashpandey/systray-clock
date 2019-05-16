@@ -24,7 +24,9 @@ const (
 )
 
 func main() {
-	downloadIconsIfNotExist()
+	if err := downloadIconsIfNotExist(); err != nil {
+		panic(err)
+	}
 	systray.Run(run, exit)
 }
 
@@ -35,13 +37,15 @@ func downloadIconsIfNotExist() error {
 	}
 	iconTray := fmt.Sprintf("%s/%s", appHome, sysTrayIconFileName)
 	if !fileExist(iconTray) {
+		fmt.Printf("downloading system tray icon: %s\n", iconTray)
 		if _, err := downloadFile(systrayIconURL, appHome, sysTrayIconFileName); err != nil {
 			return err
 		}
 	}
 	desktopIcon := fmt.Sprintf("%s/%s", appHome, desktopIconFileName)
-	if !fileExist(iconTray) {
-		if _, err := downloadFile(desktopIconURL, appHome, desktopIcon); err != nil {
+	if !fileExist(desktopIcon) {
+		fmt.Printf("downloading desktop icon: %s\n", desktopIcon)
+		if _, err := downloadFile(desktopIconURL, appHome, desktopIconFileName); err != nil {
 			return err
 		}
 	}

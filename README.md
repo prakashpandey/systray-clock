@@ -13,7 +13,7 @@ This will install application in `/usr/bin` and also it make desktop entry.
 
 ## Screenshot
 
-![X-Clock](assets/clock-screenshot.png)
+![X-Clock](assets/x-clock-screenshoot.png)
 
 ## Based on
 
